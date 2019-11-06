@@ -104,9 +104,10 @@ public class CarouselPicker extends ViewPager {
         ImageView imageView;
         int textColor = 0;
 
-        public CarouselViewAdapter(Context context, List<PickerItem> items) {
+        public CarouselViewAdapter(Context context, List<PickerItem> items, ImageView imageView) {
             this.context = context;
             this.items = items;
+            this.imageView = imageView;
         }
 
 
