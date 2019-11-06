@@ -3,6 +3,7 @@ package in.goodiebag.carouselpicker;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.PagerAdapter;
@@ -88,7 +89,6 @@ public class CarouselPicker extends ViewPager {
         int w = getMeasuredWidth();
         setPageMargin((int) (-w / divisor));
 
-
     }
 
     @Override
@@ -101,12 +101,11 @@ public class CarouselPicker extends ViewPager {
 
         List<PickerItem> items = new ArrayList<>();
         Context context;
-        ImageView drawable;
+        ImageView imageView;
         int textColor = 0;
 
-        public CarouselViewAdapter(Context context, List<PickerItem> items, ImageView drawable) {
+        public CarouselViewAdapter(Context context, List<PickerItem> items) {
             this.context = context;
-            this.drawable = drawable;
             this.items = items;
         }
 
@@ -122,8 +121,26 @@ public class CarouselPicker extends ViewPager {
             ImageView iv = (ImageView) view.findViewById(R.id.iv);
             TextView tv = (TextView) view.findViewById(R.id.tv);
             PickerItem pickerItem = items.get(position);
-            iv.setVisibility(VISIBLE);
-            iv.setImageBitmap(pickerItem.getBitmap());
+
+            if(pickerItem != null) {
+                iv.setVisibility(VISIBLE);
+                tv.setVisibility(GONE);
+                iv.setImageBitmap(pickerItem.getBitmap());
+            }
+            else {
+                if (pickerItem.getText() != null) {
+                    iv.setVisibility(GONE);
+                    tv.setVisibility(VISIBLE);
+                    tv.setText(pickerItem.getText());
+                    if (textColor != 0) {
+                        tv.setTextColor(textColor);
+                    }
+                    int textSize = ((TextItem) pickerItem).getTextSize();
+                    if (textSize != 0) {
+                        tv.setTextSize(dpToPx(((TextItem) pickerItem).getTextSize()));
+                    }
+                }
+            }
             view.setTag(position);
             container.addView(view);
             return view;
@@ -206,7 +223,7 @@ public class CarouselPicker extends ViewPager {
     public static class BitmapItem implements PickerItem {
         private Bitmap bit;
 
-        public BitmapItem(Bitmap b) {
+        public BitmapItem(Bitmap bit) {
             this.bit = bit;
         }
 
