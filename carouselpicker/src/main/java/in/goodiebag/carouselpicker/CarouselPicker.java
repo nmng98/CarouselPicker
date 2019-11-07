@@ -102,12 +102,16 @@ public class CarouselPicker extends ViewPager {
         List<PickerItem> items = new ArrayList<>();
         Context context;
         ImageView imageView;
+        int drawable;
         int textColor = 0;
 
-        public CarouselViewAdapter(Context context, List<PickerItem> items, ImageView imageView) {
+        public CarouselViewAdapter(Context context, List<PickerItem> items, int drawable) {
             this.context = context;
             this.items = items;
             this.imageView = imageView;
+            if (this.drawable == 0) {
+                this.drawable = R.layout.page;
+            }
         }
 
 
@@ -118,11 +122,15 @@ public class CarouselPicker extends ViewPager {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = LayoutInflater.from(context).inflate(R.layout.page, null);
+            View view = LayoutInflater.from(context).inflate(this.drawable, null);
             ImageView iv = (ImageView) view.findViewById(R.id.iv);
             TextView tv = (TextView) view.findViewById(R.id.tv);
             PickerItem pickerItem = items.get(position);
-
+            if (pickerItem.hasDrawable()) {
+                iv.setVisibility(VISIBLE);
+                tv.setVisibility(GONE);
+                iv.setImageResource(pickerItem.getDrawable());
+            }
             if(pickerItem != null) {
                 iv.setVisibility(VISIBLE);
                 tv.setVisibility(GONE);
@@ -180,6 +188,9 @@ public class CarouselPicker extends ViewPager {
 
         Bitmap getBitmap();
 
+        @DrawableRes
+        int getDrawable();
+
         boolean hasDrawable();
     }
 
@@ -197,6 +208,11 @@ public class CarouselPicker extends ViewPager {
 
         public String getText() {
             return text;
+        }
+
+        @Override
+        public int getDrawable() {
+            return 0;
         }
 
         @Override
@@ -237,9 +253,41 @@ public class CarouselPicker extends ViewPager {
             return bit;
         }
 
+        @DrawableRes
+        public int getDrawable() {
+            return 0;
+        }
+
         @Override
         public boolean hasDrawable() {
             return true;
+        }
+    }
+    public static class DrawableItem implements PickerItem {
+        @DrawableRes
+        private int drawable;
+
+        public DrawableItem(@DrawableRes int drawable) {
+            this.drawable = drawable;
+        }
+
+        @Override
+        public String getText() {
+            return null;
+        }
+
+        @DrawableRes
+        public int getDrawable() {
+            return drawable;
+        }
+
+        @Override
+        public boolean hasDrawable() {
+            return true;
+        }
+
+        public Bitmap getBitmap() {
+            return null;
         }
     }
 

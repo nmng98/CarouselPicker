@@ -1,8 +1,11 @@
 package in.goodiebag.example;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import in.goodiebag.carouselpicker.CarouselPicker;
 import in.goodiebag.example.R;
 
 public class MainActivity extends AppCompatActivity {
-    CarouselPicker imageCarousel, textCarousel, mixCarousel;
+    CarouselPicker imageCarousel, textCarousel, mixCarousel, bitCarousel;
     TextView tvSelected;
 
     @Override
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         imageCarousel = (CarouselPicker) findViewById(R.id.imageCarousel);
         textCarousel = (CarouselPicker) findViewById(R.id.textCarousel);
         mixCarousel = (CarouselPicker) findViewById(R.id.mixCarousel);
+        bitCarousel = findViewById(R.id.bitCarousel);
         tvSelected = (TextView) findViewById(R.id.tvSelectedItem);
 
         List<CarouselPicker.PickerItem> imageItems = new ArrayList<>();
@@ -46,9 +50,22 @@ public class MainActivity extends AppCompatActivity {
         mixItems.add(new CarouselPicker.DrawableItem(R.drawable.i2));
         mixItems.add(new CarouselPicker.TextItem("hi", 20));
 
-        CarouselPicker.CarouselViewAdapter mixAdapter = new CarouselPicker.CarouselViewAdapter(this, mixItems, 0);
+        Bitmap icon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.i1);
+        List<CarouselPicker.PickerItem> bitItems = new ArrayList<>();
+        Bitmap icon2 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.i2);
+        Bitmap icon3 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.i3);
+        bitItems.add(new CarouselPicker.BitmapItem(icon));
+        bitItems.add(new CarouselPicker.BitmapItem(icon2));
+        bitItems.add(new CarouselPicker.BitmapItem(icon3));
+
+        /*CarouselPicker.CarouselViewAdapter mixAdapter = new CarouselPicker.CarouselViewAdapter(this, mixItems, 0);
         mixAdapter.setTextColor(getResources().getColor(R.color.colorPrimary));
-        mixCarousel.setAdapter(mixAdapter);
+        mixCarousel.setAdapter(mixAdapter);*/
+        CarouselPicker.CarouselViewAdapter bitAdapter = new CarouselPicker.CarouselViewAdapter(this, bitItems, 0);
+        bitCarousel.setAdapter(bitAdapter);
 
         imageCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
