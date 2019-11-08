@@ -2,6 +2,7 @@ package in.goodiebag.example;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
         imageItems.add(new CarouselPicker.DrawableItem(R.drawable.i2));
         imageItems.add(new CarouselPicker.DrawableItem(R.drawable.i3));
         imageItems.add(new CarouselPicker.DrawableItem(R.drawable.i4));
-        CarouselPicker.CarouselViewAdapter imageAdapter = new CarouselPicker.CarouselViewAdapter(this, imageItems, 0);
-        imageCarousel.setAdapter(imageAdapter);
+        //CarouselPicker.CarouselViewAdapter imageAdapter = new CarouselPicker.CarouselViewAdapter(this, imageItems, 0);
+        //imageCarousel.setAdapter(imageAdapter);
 
         List<CarouselPicker.PickerItem> textItems = new ArrayList<>();
         textItems.add(new CarouselPicker.TextItem("hi", 20));
         textItems.add(new CarouselPicker.TextItem("hi", 20));
         textItems.add(new CarouselPicker.TextItem("hi", 20));
         textItems.add(new CarouselPicker.TextItem("hi", 20));
-        CarouselPicker.CarouselViewAdapter textAdapter = new CarouselPicker.CarouselViewAdapter(this, textItems, 0);
-        textCarousel.setAdapter(textAdapter);
+        //CarouselPicker.CarouselViewAdapter textAdapter = new CarouselPicker.CarouselViewAdapter(this, textItems, 0);
+        //textCarousel.setAdapter(textAdapter);
 
         List<CarouselPicker.PickerItem> mixItems = new ArrayList<>();
         mixItems.add(new CarouselPicker.DrawableItem(R.drawable.i1));
@@ -53,20 +54,12 @@ public class MainActivity extends AppCompatActivity {
         mixItems.add(new CarouselPicker.DrawableItem(R.drawable.i2));
         mixItems.add(new CarouselPicker.TextItem("hi", 20));
 
-        Bitmap icon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.guess);
-        final List<CarouselPicker.PickerItem> bitItems = new ArrayList<>();
-        Bitmap icon2 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.stussy);
-        Bitmap icon3 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.carhart);
-        bitItems.add(new CarouselPicker.BitmapItem(icon));
-        bitItems.add(new CarouselPicker.BitmapItem(icon2));
-        bitItems.add(new CarouselPicker.BitmapItem(icon3));
 
-        /*CarouselPicker.CarouselViewAdapter mixAdapter = new CarouselPicker.CarouselViewAdapter(this, mixItems, 0);
-        mixAdapter.setTextColor(getResources().getColor(R.color.colorPrimary));
-        mixCarousel.setAdapter(mixAdapter);*/
+        List<CarouselPicker.PickerItem> bitItems = new ArrayList<>();
+        bitItems.add(new CarouselPicker.BitmapItem(convertToBit(R.drawable.black_jeans)));
+        bitItems.add(new CarouselPicker.BitmapItem(convertToBit(R.drawable.striped_pants)));
+        bitItems.add(new CarouselPicker.BitmapItem(convertToBit(R.drawable.jeans)));
+
         CarouselPicker.CarouselViewAdapter bitAdapter = new CarouselPicker.CarouselViewAdapter(this, bitItems, 0);
         bitCarousel.setAdapter(bitAdapter);
 
@@ -78,9 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                tvSelected.setText("Selected item in image carousel is  : "+ position);
-                //ivSelected.set(bitItems[position]);
-                //ivSelected.bringToFront();
+                //tvSelected.setText("Selected item in image carousel is  : "+ position);
+
             }
 
             @Override
@@ -114,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                tvSelected.setText("Selected item in mix carousel is  : "+position);
+                tvSelected.setText("Selected item in mix carousel is  : "+ position);
+                tvSelected.setTextColor(000000);
             }
 
             @Override
@@ -122,5 +115,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+    private Bitmap convertToBit(int drawable) {
+        Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                drawable);
+        return bitmap;
     }
 }

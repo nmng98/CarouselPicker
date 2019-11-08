@@ -132,6 +132,8 @@ public class CarouselPicker extends ViewPager {
                 tv.setVisibility(GONE);
                 iv.setImageResource(pickerItem.getDrawable());
             }
+            // ADDED BIT ITEM
+            // WILL CONVERT BIT TO IMAGE
             if(pickerItem != null) {
                 iv.setVisibility(VISIBLE);
                 tv.setVisibility(GONE);
@@ -291,6 +293,5 @@ public class CarouselPicker extends ViewPager {
             return null;
         }
     }
-
 
 }
