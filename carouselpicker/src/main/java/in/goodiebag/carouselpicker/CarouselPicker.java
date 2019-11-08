@@ -70,6 +70,7 @@ public class CarouselPicker extends ViewPager {
         this.setPageTransformer(false, new CustomPageTransformer(getContext()));
         this.setClipChildren(false);
         this.setFadingEdgeLength(0);
+
     }
 
     @Override

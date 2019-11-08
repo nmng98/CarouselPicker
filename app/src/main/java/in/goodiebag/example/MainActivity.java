@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import in.goodiebag.example.R;
 public class MainActivity extends AppCompatActivity {
     CarouselPicker imageCarousel, textCarousel, mixCarousel, bitCarousel;
     TextView tvSelected;
+    ImageView ivSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mixCarousel = (CarouselPicker) findViewById(R.id.mixCarousel);
         bitCarousel = findViewById(R.id.bitCarousel);
         tvSelected = (TextView) findViewById(R.id.tvSelectedItem);
+        ivSelected = findViewById(R.id.ivSelectedItem);
 
         List<CarouselPicker.PickerItem> imageItems = new ArrayList<>();
         imageItems.add(new CarouselPicker.DrawableItem(R.drawable.i1));
@@ -51,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         mixItems.add(new CarouselPicker.TextItem("hi", 20));
 
         Bitmap icon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.i1);
-        List<CarouselPicker.PickerItem> bitItems = new ArrayList<>();
+                R.drawable.guess);
+        final List<CarouselPicker.PickerItem> bitItems = new ArrayList<>();
         Bitmap icon2 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.i2);
+                R.drawable.stussy);
         Bitmap icon3 = BitmapFactory.decodeResource(getApplicationContext().getResources(),
-                R.drawable.i3);
+                R.drawable.carhart);
         bitItems.add(new CarouselPicker.BitmapItem(icon));
         bitItems.add(new CarouselPicker.BitmapItem(icon2));
         bitItems.add(new CarouselPicker.BitmapItem(icon3));
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         CarouselPicker.CarouselViewAdapter bitAdapter = new CarouselPicker.CarouselViewAdapter(this, bitItems, 0);
         bitCarousel.setAdapter(bitAdapter);
 
-        imageCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        bitCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -75,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                tvSelected.setText("Selected item in image carousel is  : "+position);
+                tvSelected.setText("Selected item in image carousel is  : "+ position);
+                //ivSelected.set(bitItems[position]);
+                //ivSelected.bringToFront();
             }
 
             @Override
