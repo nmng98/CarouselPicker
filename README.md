@@ -2,7 +2,7 @@
 
 ![alt downloads](https://img.shields.io/jitpack/dm/github/GoodieBag/CarouselPicker.svg)
 
- A Carousel picker library for android which supports both text, icons, (and Bitmap values). :pouting_cat:
+ A Carousel picker library for android which supports both text, icons, and *Bitmap values*. :pouting_cat:
  
  <img src="https://raw.githubusercontent.com/GoodieBag/CarouselPicker/master/gif/gif_image_480.gif" height="500"> <img src="https://raw.githubusercontent.com/GoodieBag/CarouselPicker/master/gif/gif_text_480.gif" height="500">
 <img src="https://raw.githubusercontent.com/GoodieBag/CarouselPicker/master/gif/gif_mix_480.gif" height="500">
